@@ -51,8 +51,8 @@ void loop() {
   }
   strip1.fill_solid(CHSV(rainbow_sync, 255, 255));
   strip2.fill_rainbow(rainbow_sync, 255/NUM_STRIP2_LEDS);
-  strip3.fill_rainbow(rainbow_sync, 255/NUM_STRIP3_LEDS);
-  strip4.fill_rainbow(rainbow_sync, 255/NUM_STRIP4_LEDS);
+  strip4.fill_rainbow(rainbow_sync + 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS)*NUM_STRIP3_LEDS, 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS));
+  strip3.fill_rainbow(rainbow_sync, 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS));
   strip5.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP5_LEDS);//reverse direction
   for (int i = 0; i < NUM_STRIP5_LEDS; i++) {
     if (i % 2 == 0) {
@@ -62,7 +62,7 @@ void loop() {
     }
   }
   //strip6.fill_rainbow(rainbow_sync, 255/NUM_STRIP6_LEDS);
-  strip6.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP6_LEDS);//reverse direction
+  strip6.fill_rainbow(rainbow_sync, 255/NUM_STRIP6_LEDS);
   for (int i = 0; i < NUM_STRIP6_LEDS; i++) {
     if (i % 2 == 0) {
       strip6[i] = 0;
