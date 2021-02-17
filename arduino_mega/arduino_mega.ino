@@ -49,17 +49,26 @@ void loop() {
   for(int i=0;i<NUM_FANS;i++){
     fans[i].fill_rainbow(rainbow_sync, 255/NUM_FAN_LEDS);
   }
-  strip1.fill_rainbow(rainbow_sync, 255/NUM_STRIP1_LEDS);
+  strip1.fill_solid(CHSV(rainbow_sync, 255, 255));
   strip2.fill_rainbow(rainbow_sync, 255/NUM_STRIP2_LEDS);
   strip3.fill_rainbow(rainbow_sync, 255/NUM_STRIP3_LEDS);
   strip4.fill_rainbow(rainbow_sync, 255/NUM_STRIP4_LEDS);
-  strip5.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP5_LEDS);
-  for (int i = 0; i < NUM_STRIP5_LEDS; i+=2) {
-    strip5[i] = 0;
+  strip5.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP5_LEDS);//reverse direction
+  for (int i = 0; i < NUM_STRIP5_LEDS; i++) {
+    if (i % 2 == 0) {
+      strip5[i] = 0;
+    } else {
+      //strip6[i] *= 255 - 255/NUM_STRIP5_LEDS;
+    }
   }
-  strip6.fill_rainbow(rainbow_sync, 255/NUM_STRIP6_LEDS);
-  for (int i = 0; i < NUM_STRIP6_LEDS; i+=2) {
-    strip6[i] = 0;
+  //strip6.fill_rainbow(rainbow_sync, 255/NUM_STRIP6_LEDS);
+  strip6.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP6_LEDS);//reverse direction
+  for (int i = 0; i < NUM_STRIP6_LEDS; i++) {
+    if (i % 2 == 0) {
+      strip6[i] = 0;
+    } else {
+      //strip6[i] *= 255 - 255/NUM_STRIP5_LEDS;
+    }
   }
   FastLED.show();
   //delay(Delay);
