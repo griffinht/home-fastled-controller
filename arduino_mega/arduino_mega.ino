@@ -10,6 +10,8 @@
 #define NUM_STRIP5_LEDS 93 //monitors
 #define NUM_STRIP6_LEDS 130 //desk
 
+#define DELTA 255/NUM_STRIP1_LEDS
+
 byte rainbow_sync = 0;
 
 CRGBArray<NUM_FAN_LEDS> fans[NUM_FANS];
@@ -50,10 +52,10 @@ void loop() {
     fans[i].fill_rainbow(rainbow_sync, 255/NUM_FAN_LEDS);
   }
   strip1.fill_solid(CHSV(rainbow_sync, 255, 255));
-  strip2.fill_rainbow(rainbow_sync, 255/NUM_STRIP2_LEDS);
-  strip4.fill_rainbow(rainbow_sync + 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS)*NUM_STRIP3_LEDS, 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS));
-  strip3.fill_rainbow(rainbow_sync, 255/(NUM_STRIP3_LEDS + NUM_STRIP4_LEDS));
-  strip5.fill_rainbow(rainbow_sync, 255 - 255/NUM_STRIP5_LEDS);//reverse direction
+  strip2.fill_rainbow(rainbow_sync, DELTA);
+  strip4.fill_rainbow(rainbow_sync - 4*DELTA, DELTA);//makes strip4 look combined with strip3
+  strip3.fill_rainbow(rainbow_sync - (4 + NUM_STRIP3_LEDS)*DELTA, DELTA);
+  strip5.fill_rainbow(rainbow_sync, 255 - (255/NUM_STRIP5_LEDS));//reverse direction
   for (int i = 0; i < NUM_STRIP5_LEDS; i++) {
     if (i % 2 == 0) {
       strip5[i] = 0;
